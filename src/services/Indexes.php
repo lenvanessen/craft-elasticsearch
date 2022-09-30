@@ -458,11 +458,11 @@ class Indexes extends Component
         $predefinedAttributes = [
             'title' => [
                 'type' => 'text',
-                'analyzer' => 'standard',
+                'analyzer' => 'whitespace',
             ],
             'slug' => [
                 'type' => 'text',
-                'analyzer' => 'standard',
+                'analyzer' => 'whitespace',
             ],
             'postDate' => [
                 'type' => 'date',
@@ -481,7 +481,7 @@ class Indexes extends Component
             foreach ($elementType::searchableAttributes() as $attribute) {
                 $mapping[$fieldPrefix . 'attribute_' . $attribute] = [
                     'type' => 'text',
-                    'analyzer' => 'standard',
+                    'analyzer' => 'whitespace',
                 ];
             }
         }
@@ -491,7 +491,7 @@ class Indexes extends Component
             if ($field->searchable) {
                 $mapping[$fieldPrefix . 'field_' . $field->id] = [
                     'type' => 'text',
-                    'analyzer' => 'standard',
+                    'analyzer' => 'whitespace',
                 ];
             }
         }
