@@ -450,26 +450,27 @@ class Indexes extends Component
         return $result[$currentIndex]['mappings']['properties'] ?? [];
     }
 
-    /**
-     * Returns the mapping configuration for a site.
-     *
-     * @return array
-     */
     public function buildMapping(): array
     {
         $fieldPrefix = Elastic::$settings->fieldPrefix;
         $mapping = [];
 
         $predefinedAttributes = [
-            'title',
-            'slug',
-        ];
-
-        foreach ($predefinedAttributes as $attribute) {
-            $mapping[$fieldPrefix . 'attribute_' . $attribute] = [
+            'title' => [
                 'type' => 'text',
                 'analyzer' => 'standard',
-            ];
+            ],
+            'slug' => [
+                'type' => 'text',
+                'analyzer' => 'standard',
+            ],
+            'postDate' => [
+                'type' => 'date',
+            ],
+        ];
+
+        foreach ($predefinedAttributes as $attribute => $config) {
+            $mapping[$fieldPrefix . 'attribute_' . $attribute] = $config;
         }
 
         /**
